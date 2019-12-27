@@ -5,7 +5,7 @@ from django.contrib import auth
 def signup(request):
     if request.method == 'POST':
         #User wants to signup
-        if request.POST['password1'] == request.POST['password2']:
+        if request.POST['password1'] == request.POST['password2'] and request.POST['username'] and not (' ' in request.POST['username']):
             try:
                 user = User.objects.get(username=request.POST['username'])
                 return render(request, 'accounts/signup.html', {'error':'User name has already been taken'})
